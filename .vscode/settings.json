@@ -1,0 +1,3 @@
+{
+    "rust-analyzer.linkedProjects": ["./blogs/post-01/simple-game/Cargo.toml"],
+}

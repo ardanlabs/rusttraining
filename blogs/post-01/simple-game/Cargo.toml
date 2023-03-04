@@ -1,0 +1,12 @@
+[package]
+name = "simple-game"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bracket-lib = "0.8"
+rltk = { version = "0.8.0" }
+specs = "0.16.1"
+specs-derive = "0.4.1"
