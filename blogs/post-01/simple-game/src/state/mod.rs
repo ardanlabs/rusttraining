@@ -1,5 +1,7 @@
 //! State contains all the game state and logic.
 
+use bracket_lib::prelude as blib;
+
 const TOP_SCREEN_PIXEL: i32 = 8;
 const BOX_HEIGHTWIDTH: i32 = 5;
 const GROUND_PIXEL: i32 = 45;
@@ -31,8 +33,8 @@ pub fn new() -> State {
 }
 
 /// State implementation of the GameState trait.
-impl rltk::GameState for State {
-    fn tick(&mut self, bterm: &mut rltk::BTerm) {
+impl blib::GameState for State {
+    fn tick(&mut self, bterm: &mut blib::BTerm) {
         self.keyboard_input(bterm);
         self.render(bterm);
     }
@@ -41,10 +43,10 @@ impl rltk::GameState for State {
 /// Method set for the State type.
 impl State {
     /// keyboard_input handles the processing of keyboard input.
-    fn keyboard_input(&mut self, rltk: &mut rltk::Rltk) {
+    fn keyboard_input(&mut self, rltk: &mut blib::BTerm) {
         match rltk.key {
             None => {}
-            Some(rltk::VirtualKeyCode::Space) => {
+            Some(blib::VirtualKeyCode::Space) => {
                 if self.box_y == GROUND_COLLISION {
                     self.box_moving = Moving::Up;
                 }
@@ -54,8 +56,8 @@ impl State {
     }
 
     /// render takes the current game state and renders the screen.
-    fn render(&mut self, bterm: &mut rltk::BTerm) {
-        bterm.cls_bg(rltk::RGB::named(rltk::WHITE));
+    fn render(&mut self, bterm: &mut blib::BTerm) {
+        bterm.cls_bg(blib::RGB::named(blib::WHITE));
 
         bterm.draw_bar_horizontal(
             0,                              // x
@@ -63,8 +65,8 @@ impl State {
             GROUND_WIDTH,                   // width
             GAME_WINDOW,                    // n
             GAME_WINDOW,                    // max
-            rltk::RGB::named(rltk::YELLOW), // foreground color
-            rltk::RGB::named(rltk::YELLOW), // background color
+            blib::RGB::named(blib::YELLOW), // foreground color
+            blib::RGB::named(blib::YELLOW), // background color
         );
 
         bterm.draw_bar_horizontal(
@@ -73,8 +75,8 @@ impl State {
             GROUND_WIDTH,                   // width
             GAME_WINDOW,                    // n
             GAME_WINDOW,                    // max
-            rltk::RGB::named(rltk::YELLOW), // foreground color
-            rltk::RGB::named(rltk::YELLOW), // background color
+            blib::RGB::named(blib::YELLOW), // foreground color
+            blib::RGB::named(blib::YELLOW), // background color
         );
 
         bterm.draw_box_double(
@@ -82,8 +84,8 @@ impl State {
             self.box_y,                  // y
             BOX_HEIGHTWIDTH,             // width
             BOX_HEIGHTWIDTH,             // height
-            rltk::RGB::named(rltk::RED), // foreground color
-            rltk::RGB::named(rltk::RED), // background color
+            blib::RGB::named(blib::RED), // foreground color
+            blib::RGB::named(blib::RED), // background color
         );
 
         match self.box_moving {
@@ -107,15 +109,15 @@ impl State {
             0,
             20,
             3,
-            rltk::RGB::named(rltk::WHITE),
-            rltk::RGB::named(rltk::BLACK),
+            blib::RGB::named(blib::WHITE),
+            blib::RGB::named(blib::BLACK),
         );
 
         bterm.printer(
             55,
             1,
             &format!("#[pink]FPS: #[]{}", bterm.fps),
-            rltk::TextAlign::Right,
+            blib::TextAlign::Right,
             None,
         );
 
@@ -123,7 +125,7 @@ impl State {
             55,
             5,
             &format!("#[pink]Frame Time: #[]{} ms", bterm.frame_time_ms),
-            rltk::TextAlign::Right,
+            blib::TextAlign::Right,
             None,
         );
     }
