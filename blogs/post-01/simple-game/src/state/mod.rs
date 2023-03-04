@@ -2,12 +2,12 @@
 
 use bracket_lib::prelude as blib;
 
-const TOP_SCREEN_PIXEL: i32 = 8;
-const BOX_HEIGHTWIDTH: i32 = 5;
-const GROUND_PIXEL: i32 = 45;
-const GROUND_WIDTH: i32 = 80;
-const GAME_WINDOW: i32 = 50;
-const GROUND_COLLISION: i32 = GROUND_PIXEL - BOX_HEIGHTWIDTH;
+const TOP_SCREEN_PIXEL: isize = 8;
+const BOX_HEIGHTWIDTH: isize = 5;
+const GROUND_PIXEL: isize = 45;
+const GROUND_WIDTH: isize = 80;
+const GAME_WINDOW: isize = 50;
+const GROUND_COLLISION: isize = GROUND_PIXEL - BOX_HEIGHTWIDTH;
 
 /// Moving represents the set of possible moving options.
 enum Moving {
@@ -20,7 +20,7 @@ enum Moving {
 
 /// State represents the game state for the game.
 pub struct State {
-    box_y: i32,         // Box's vertical position.
+    box_y: isize,       // Box's vertical position.
     box_moving: Moving, // Direction the box is moving.
 }
 
