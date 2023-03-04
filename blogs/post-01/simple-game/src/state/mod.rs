@@ -2,12 +2,14 @@
 
 use bracket_lib::prelude as blib;
 
-const TOP_SCREEN_PIXEL: isize = 5;
-const BOX_HEIGHTWIDTH: isize = 5;
-const GROUND_PIXEL: isize = 45;
-const GROUND_WIDTH: isize = 80;
-const GAME_WINDOW: isize = 50;
-const GROUND_COLLISION: isize = GROUND_PIXEL - BOX_HEIGHTWIDTH;
+const GAME_WINDOW_HEIGHT: isize = 50;
+const GAME_WINDOW_WIDTH: isize = 80;
+const BOX_HEIGHT: isize = 5;
+const BOX_WIDTH: isize = 5;
+const CEILING_POS: isize = 5;
+const FLOOR_POS: isize = 45;
+const CEILING_COLLISION: isize = CEILING_POS + 1;
+const GROUND_COLLISION: isize = FLOOR_POS - BOX_HEIGHT - 1;
 
 /// Moving represents the set of possible moving options.
 enum Moving {
@@ -61,20 +63,20 @@ impl State {
 
         bterm.draw_bar_horizontal(
             0,                              // x
-            TOP_SCREEN_PIXEL,               // y
-            GROUND_WIDTH,                   // width
-            GAME_WINDOW,                    // n
-            GAME_WINDOW,                    // max
+            CEILING_POS,                    // y
+            GAME_WINDOW_WIDTH,              // width
+            GAME_WINDOW_HEIGHT,             // n
+            GAME_WINDOW_HEIGHT,             // max
             blib::RGB::named(blib::YELLOW), // foreground color
             blib::RGB::named(blib::YELLOW), // background color
         );
 
         bterm.draw_bar_horizontal(
             0,                              // x
-            GROUND_PIXEL,                   // y
-            GROUND_WIDTH,                   // width
-            GAME_WINDOW,                    // n
-            GAME_WINDOW,                    // max
+            FLOOR_POS,                      // y
+            GAME_WINDOW_WIDTH,              // width
+            GAME_WINDOW_HEIGHT,             // n
+            GAME_WINDOW_HEIGHT,             // max
             blib::RGB::named(blib::YELLOW), // foreground color
             blib::RGB::named(blib::YELLOW), // background color
         );
@@ -82,8 +84,8 @@ impl State {
         bterm.draw_box_double(
             10,                          // x
             self.box_y,                  // y
-            BOX_HEIGHTWIDTH,             // width
-            BOX_HEIGHTWIDTH,             // height
+            BOX_WIDTH,                   // width
+            BOX_HEIGHT,                  // height
             blib::RGB::named(blib::RED), // foreground color
             blib::RGB::named(blib::RED), // background color
         );
@@ -97,7 +99,7 @@ impl State {
             }
             Moving::Up => {
                 self.box_y -= 1;
-                if self.box_y == TOP_SCREEN_PIXEL {
+                if self.box_y == CEILING_COLLISION {
                     self.box_moving = Moving::Down;
                 }
             }
