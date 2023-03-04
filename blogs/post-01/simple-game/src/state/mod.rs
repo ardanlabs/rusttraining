@@ -9,7 +9,7 @@ const BOX_WIDTH: isize = 5;
 const CEILING_POS: isize = 5;
 const FLOOR_POS: isize = 45;
 const CEILING_COLLISION: isize = CEILING_POS + 1;
-const GROUND_COLLISION: isize = FLOOR_POS - BOX_HEIGHT - 1;
+const FLOOR_COLLISION: isize = FLOOR_POS - BOX_HEIGHT - 1;
 
 /// Moving represents the set of possible moving options.
 enum Moving {
@@ -29,7 +29,7 @@ pub struct State {
 /// new constructs a new game state.
 pub fn new() -> State {
     return State {
-        box_y: GROUND_COLLISION,
+        box_y: FLOOR_COLLISION,
         box_moving: Moving::Not,
     };
 }
@@ -49,7 +49,7 @@ impl State {
         match bterm.key {
             None => {}
             Some(blib::VirtualKeyCode::Space) => {
-                if self.box_y == GROUND_COLLISION {
+                if self.box_y == FLOOR_COLLISION {
                     self.box_moving = Moving::Up;
                 }
             }
@@ -93,7 +93,7 @@ impl State {
         match self.box_moving {
             Moving::Down => {
                 self.box_y += 1;
-                if self.box_y == GROUND_COLLISION {
+                if self.box_y == FLOOR_COLLISION {
                     self.box_moving = Moving::Not;
                 }
             }
