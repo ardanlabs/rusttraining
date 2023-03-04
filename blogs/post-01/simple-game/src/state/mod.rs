@@ -43,8 +43,8 @@ impl blib::GameState for State {
 /// Method set for the State type.
 impl State {
     /// keyboard_input handles the processing of keyboard input.
-    fn keyboard_input(&mut self, rltk: &mut blib::BTerm) {
-        match rltk.key {
+    fn keyboard_input(&mut self, bterm: &mut blib::BTerm) {
+        match bterm.key {
             None => {}
             Some(blib::VirtualKeyCode::Space) => {
                 if self.box_y == GROUND_COLLISION {
