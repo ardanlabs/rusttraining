@@ -2,7 +2,7 @@
 
 use bracket_lib::prelude as blib;
 
-const TOP_SCREEN_PIXEL: isize = 8;
+const TOP_SCREEN_PIXEL: isize = 5;
 const BOX_HEIGHTWIDTH: isize = 5;
 const GROUND_PIXEL: isize = 45;
 const GROUND_WIDTH: isize = 80;
@@ -103,30 +103,5 @@ impl State {
             }
             _ => {}
         }
-
-        bterm.draw_box(
-            36,
-            0,
-            20,
-            3,
-            blib::RGB::named(blib::WHITE),
-            blib::RGB::named(blib::BLACK),
-        );
-
-        bterm.printer(
-            55,
-            1,
-            &format!("#[pink]FPS: #[]{}", bterm.fps),
-            blib::TextAlign::Right,
-            None,
-        );
-
-        bterm.printer(
-            55,
-            5,
-            &format!("#[pink]Frame Time: #[]{} ms", bterm.frame_time_ms),
-            blib::TextAlign::Right,
-            None,
-        );
     }
 }
