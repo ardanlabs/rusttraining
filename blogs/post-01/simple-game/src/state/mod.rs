@@ -82,7 +82,7 @@ impl State {
         );
 
         bterm.draw_box_double(
-            10,                          // x
+            (GAME_WINDOW_WIDTH / 2) - 3, // x
             self.box_y,                  // y
             BOX_WIDTH,                   // width
             BOX_HEIGHT,                  // height
