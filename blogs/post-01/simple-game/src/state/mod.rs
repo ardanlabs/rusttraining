@@ -1,6 +1,6 @@
 //! State contains all the game state and logic.
 
-use bracket_lib::prelude as blib;
+use bracket_lib::prelude::*;
 
 const GAME_WINDOW_HEIGHT: isize = 50;
 const GAME_WINDOW_WIDTH: isize = 80;
@@ -35,8 +35,8 @@ pub fn new() -> State {
 }
 
 /// State implementation of the GameState trait.
-impl blib::GameState for State {
-    fn tick(&mut self, bterm: &mut blib::BTerm) {
+impl GameState for State {
+    fn tick(&mut self, bterm: &mut BTerm) {
         self.keyboard_input(bterm);
         self.render(bterm);
     }
@@ -45,10 +45,10 @@ impl blib::GameState for State {
 /// Method set for the State type.
 impl State {
     /// keyboard_input handles the processing of keyboard input.
-    fn keyboard_input(&mut self, bterm: &mut blib::BTerm) {
+    fn keyboard_input(&mut self, bterm: &mut BTerm) {
         match bterm.key {
             None => {}
-            Some(blib::VirtualKeyCode::Space) => {
+            Some(VirtualKeyCode::Space) => {
                 if self.box_y == FLOOR_COLLISION {
                     self.box_moving = Moving::Up;
                 }
@@ -58,27 +58,27 @@ impl State {
     }
 
     /// render takes the current game state and renders the screen.
-    fn render(&mut self, bterm: &mut blib::BTerm) {
-        bterm.cls_bg(blib::RGB::named(blib::WHITE));
+    fn render(&mut self, bterm: &mut BTerm) {
+        bterm.cls_bg(WHITE);
 
         bterm.draw_bar_horizontal(
-            0,                              // x
-            CEILING_POS,                    // y
-            GAME_WINDOW_WIDTH,              // width
-            GAME_WINDOW_HEIGHT,             // n
-            GAME_WINDOW_HEIGHT,             // max
-            blib::RGB::named(blib::YELLOW), // foreground color
-            blib::RGB::named(blib::YELLOW), // background color
+            0,                  // x
+            CEILING_POS,        // y
+            GAME_WINDOW_WIDTH,  // width
+            GAME_WINDOW_HEIGHT, // n
+            GAME_WINDOW_HEIGHT, // max
+            YELLOW,             // foreground color
+            YELLOW,             // background color
         );
 
         bterm.draw_bar_horizontal(
-            0,                              // x
-            FLOOR_POS,                      // y
-            GAME_WINDOW_WIDTH,              // width
-            GAME_WINDOW_HEIGHT,             // n
-            GAME_WINDOW_HEIGHT,             // max
-            blib::RGB::named(blib::YELLOW), // foreground color
-            blib::RGB::named(blib::YELLOW), // background color
+            0,                  // x
+            FLOOR_POS,          // y
+            GAME_WINDOW_WIDTH,  // width
+            GAME_WINDOW_HEIGHT, // n
+            GAME_WINDOW_HEIGHT, // max
+            YELLOW,             // foreground color
+            YELLOW,             // background color
         );
 
         bterm.draw_box_double(
@@ -86,8 +86,8 @@ impl State {
             self.box_y,                  // y
             BOX_WIDTH,                   // width
             BOX_HEIGHT,                  // height
-            blib::RGB::named(blib::RED), // foreground color
-            blib::RGB::named(blib::RED), // background color
+            RED,                         // foreground color
+            RED,                         // background color
         );
 
         match self.box_moving {

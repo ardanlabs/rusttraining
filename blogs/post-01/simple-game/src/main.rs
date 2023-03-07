@@ -1,15 +1,14 @@
-use bracket_lib::prelude as blib;
-
-pub mod state;
+mod state;
+use bracket_lib::terminal::{main_loop, BTermBuilder};
 
 fn main() {
-    let result = blib::BTermBuilder::simple80x50()
+    let result = BTermBuilder::simple80x50()
         .with_title("Hello Bracket World")
         .build();
 
     match result {
         Ok(bterm) => {
-            let _ = blib::main_loop(bterm, state::new());
+            let _ = main_loop(bterm, state::new());
         }
         Err(err) => {
             println!("An error has occurred: {err:?}");
