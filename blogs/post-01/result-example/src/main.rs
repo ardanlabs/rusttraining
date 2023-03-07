@@ -3,11 +3,11 @@ struct User {
     age: isize,
 }
 
-struct UserError {
+struct Error {
     msg: String,
 }
 
-fn query_user(worked: bool) -> Result<User, UserError> {
+fn query_user(worked: bool) -> Result<User, Error> {
     let result;
 
     match worked {
@@ -19,7 +19,7 @@ fn query_user(worked: bool) -> Result<User, UserError> {
         }
 
         false => {
-            result = Err(UserError {
+            result = Err(Error {
                 msg: "unable to fetch user".to_string(),
             });
         }
