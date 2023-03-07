@@ -1,5 +1,5 @@
-mod state;
 use bracket_lib::terminal::{main_loop, BTermBuilder};
+mod state;
 
 fn main() {
     let result = BTermBuilder::simple80x50()
