@@ -103,7 +103,7 @@ impl State {
                     self.box_moving = Moving::Down;
                 }
             }
-            _ => {}
+            Moving::Not => {}
         }
     }
 }
