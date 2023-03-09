@@ -8,24 +8,16 @@ struct Error {
 }
 
 fn query_user(worked: bool) -> Result<User, Error> {
-    let result;
-
-    match worked {
-        true => {
-            result = Ok(User {
-                name: "Bill".to_string(),
-                age: 53,
-            });
-        }
-
-        false => {
-            result = Err(Error {
-                msg: "unable to fetch user".to_string(),
-            });
-        }
+    if worked {
+        return Ok(User {
+            name: "Bill".to_string(),
+            age: 53,
+        });
     }
 
-    return result;
+    return Err(Error {
+        msg: "unable to fetch user".to_string(),
+    });
 }
 
 fn main() {
